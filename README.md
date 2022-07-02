@@ -17,8 +17,6 @@
   - [Install Dependencies](#install-dependencies)
 - [Testing the Smartcontract](#testing-the-smartcontract)
 - [NFTSwap Contract Address](#NFTSwap-contract-address)
-- [Live Link](#live-link)
-- [Contributors](#contributors)
 - [Contributing to the project](#contributing-to-the-project)
 #
 > ## Overview
@@ -189,23 +187,6 @@ $ npx hardhat coverage --network localhost
 # if you get errors and you want to trace the error in the terminal
 $ npx hardhat coverage --network localhost --show-stack-traces
 ```
-#
-
-<p align="center" width="100%">
-  <img src="https://drive.google.com/uc?export=view&id=16zXW2QHBBinyC0adq1Cd41YUD1grjR1X" alt="coverage tests"/>
-</p>
-
-
-#
-> ## NFTSwap Contract Address
-
-
-# 
-
-
-
-> ## Live Link
-  
 
 
 #
@@ -213,10 +194,6 @@ $ npx hardhat coverage --network localhost --show-stack-traces
 > ## Contributors
 
 This Project was created by the members of NestDevs during the Blockgames Internship.
-<!-- 
-<p align="center" width="100%">
-  <img src="https://drive.google.com/uc?export=view&id=17igBfE_fikN2_NGJ0am0IaK8V1IW3Q-8" alt="NestDevs"/>
-</p> -->
 
 #
 > ## Contributing to the project

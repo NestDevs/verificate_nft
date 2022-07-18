@@ -69,7 +69,9 @@ The steps involved are outlined below:-
 The first step involves cloning and installing hardhat.
 ```shell
 
-$ npm install --save-dev "@nomiclabs/hardhat-waffle" "ethereum-waffle" "chai" "@nomiclabs/hardhat-ethers" "ethers" "web3" "@nomiclabs/hardhat-web3" "@nomiclabs/hardhat-etherscan" "@openzeppelin/contracts" "dotenv" "@tenderly/hardhat-tenderly" "hardhat-gas-reporter" "hardhat-deploy"
+$ npm i -D hardhat
+
+$ npm install --save-dev "@nomicfoundation/hardhat-chai-matchers" "chai" "@nomiclabs/hardhat-ethers" "ethers" "web3" "@nomiclabs/hardhat-web3" "@nomiclabs/hardhat-etherscan" "@openzeppelin/contracts" "dotenv" "@tenderly/hardhat-tenderly" "hardhat-gas-reporter" "hardhat-deploy"
 ```
 > ### Env Setup
  Next create a `.env` file by using the sample.env. Retrieve your information from the relevant sites and input the information where needed in the `.env` file.
@@ -138,12 +140,12 @@ $ npx hardhat run scripts/deploy.js --network mumbai
 > ### Verify
 - To verify the smartcontract:
 ```
-$ npx hardhat verify 0xB575319ce964155DB38c40F904247627D07EFd19 --network mumbai
+$ npx hardhat verify 0x08010583981Baf28b6A85AF72fC16C011148436D --network mumbai
 ```
 
 #
 > ### Verified Contract Address
-https://mumbai.polygonscan.com/address/0xB575319ce964155DB38c40F904247627D07EFd19#code
+https://mumbai.polygonscan.com/address/0x08010583981Baf28b6A85AF72fC16C011148436D#code
 #
 > ## Setup the Frontend
 - First run the frontend on your local server to ensure it's fully functional before building for production.

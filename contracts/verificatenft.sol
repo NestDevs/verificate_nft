@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.9;
 
 // imports
@@ -7,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 
 /**
 * @author Verificatedevs
@@ -40,6 +39,7 @@ contract Verificate is ERC721, ERC721URIStorage, Pausable, Ownable {
         super._burn(nftId);
     }
 
+    /** returns a URI pointing to NFT metadata */
     function tokenURI(uint256 nftId)
         public
         view

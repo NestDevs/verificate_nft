@@ -1,42 +1,67 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
 
+pragma solidity ^0.8.9;
+
+// imports
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 /**
 * @author Verificatedevs
 * @title A Skill Verification Dapp
 */
 
-contract MyToken is ERC721, ERC721URIStorage, Ownable {
+contract Verificate is ERC721, ERC721URIStorage, Pausable, Ownable {
     using Counters for Counters.Counter;
-
-    Counters.Counter private _tokenIdCounter;
+    Counters.Counter private _nftIdCounter;
 
     constructor() ERC721("VerificateNFT", "VFT") {}
 
-    function safeMint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+    /** allow contract owner to mint nft to recipient */
+    function safeMint(address to, string memory uri) 
+        public 
+        onlyOwner
+        whenNotPaused 
+    {
+        uint256 nftId = _nftIdCounter.current();
+        _nftIdCounter.increment();
+        _safeMint(to, nftId);
+        _setTokenURI(nftId, uri);
     }
 
-    // The following functions are overrides required by Solidity.
-
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
-        super._burn(tokenId);
+    /** option to destroy nft */
+    function _burn(uint256 nftId) 
+        internal 
+        override(ERC721, ERC721URIStorage) 
+    {
+        super._burn(nftId);
     }
 
-    function tokenURI(uint256 tokenId)
+    function tokenURI(uint256 nftId)
         public
         view
         override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
-        return super.tokenURI(tokenId);
+        return super.tokenURI(nftId);
+    }
+
+    /** pause contract in the event of modifications or security breach */
+    function pause()
+        public 
+        onlyOwner 
+    {
+        _pause();
+    }
+
+    /** unpause the contract */
+    function unpause() 
+        public 
+        onlyOwner 
+    {
+        _unpause();
     }
 }

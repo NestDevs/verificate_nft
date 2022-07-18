@@ -1,17 +1,16 @@
 //implement ethers from hardhat
 const{ethers} = require("hardhat");
 
-async function main(){
-     /*
-  A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts, so VerificateNFTContract here is a factory for instances of our Verificate NFT contract.
-  */
- console.log("deploying Verificate contract.......")
-    const VerificateNFTContract = await ethers.getContractFactory("Verificate");
+const main = async () => {
+/** A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts, so VerificateNFTContract here is a factory for instances of our Verificate NFT contract.
+*/
+console.log("deploying Verificate contract.......")
+  const VerificateNFTContract = await ethers.getContractFactory("Verificate");
 
-    // here we deploy the contract
-    const deployedVerificateNFTContract = await VerificateNFTContract.deploy();
+  // here we deploy the contract
+  const deployedVerificateNFTContract = await VerificateNFTContract.deploy();
 
-    // Wait for it to finish deploying
+  // Wait for it to finish deploying
   await deployedVerificateNFTContract.deployed();
 
   // print the address of the deployed contract
@@ -20,11 +19,3 @@ async function main(){
     deployedVerificateNFTContract.address
   );
 }
-
-// Call the main function and catch if there is any error
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });

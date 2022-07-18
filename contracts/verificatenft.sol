@@ -1,55 +1,42 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.8;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**
-* @author Nestdevs
+* @author Verificatedevs
 * @title A Skill Verification Dapp
 */
-contract Verificate is ERC721, Pausable, Ownable {
+
+contract MyToken is ERC721, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
-    Counters.Counter private _nftIdCounter;
 
-    /** URL for certificate */
-    string _baseNftURI;
+    Counters.Counter private _tokenIdCounter;
 
-    constructor(string memory baseURI) ERC721("VerificateNFT", "VFT") {       
-        /** declare variable for the baseuri */
-        _baseNftURI = baseURI;
+    constructor() ERC721("VerificateNFT", "VFT") {}
+
+    function safeMint(address to, string memory uri) public onlyOwner {
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
+        _safeMint(to, tokenId);
+        _setTokenURI(tokenId, uri);
     }
 
-    function _baseURI() internal view override returns (string memory) {
-        return _baseNftURI;
+    // The following functions are overrides required by Solidity.
+
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
     }
 
-    /** change certificate url */
-    function setBaseNftURI(string memory baseURI) public onlyOwner whenNotPaused {
-    _baseNftURI = baseURI;
-    }
-
-    /** allow contract owner to mint nft to recipient */
-    function safeMint(address recipient) public onlyOwner whenNotPaused {
-        uint256 nftId = _nftIdCounter.current();
-        /** increment nft count per mint */
-        _nftIdCounter.increment();
-        _safeMint(recipient, nftId);
-    }
-
-    function _beforeTokenTransfer(address from, address recipient, uint256 nftId) internal whenNotPaused override {
-        super._beforeTokenTransfer(from, recipient, nftId);
-    }
-
-    /** pause contract in the event of modifications or security breach */
-    function pause() public onlyOwner {
-        _pause();
-    }
-
-    /** unpause the contract */
-    function unpause() public onlyOwner {
-        _unpause();
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
     }
 }

@@ -13,6 +13,7 @@
   - [Compile](#compile)
   - [Deploy](#deploy)
   - [Verify](#verify)
+  - [Verified Contract Address](#verified-contract-address)
 - [Setup the Frontend](#setup-the-frontend)
   - [Install Dependencies](#install-dependencies)
 - [Testing the Smartcontract](#testing-the-smartcontract)
@@ -137,9 +138,12 @@ $ npx hardhat run scripts/deploy.js --network mumbai
 > ### Verify
 - To verify the smartcontract:
 ```
-$ npx hardhat verify ... --network mumbai
+$ npx hardhat verify 0xB575319ce964155DB38c40F904247627D07EFd19 --network mumbai
 ```
 
+#
+> ### Verified Contract Address
+https://mumbai.polygonscan.com/address/0xB575319ce964155DB38c40F904247627D07EFd19#code
 #
 > ## Setup the Frontend
 - First run the frontend on your local server to ensure it's fully functional before building for production.
@@ -179,7 +183,6 @@ $ npx hardhat coverage --network localhost
 # if you get errors and you want to trace the error in the terminal
 $ npx hardhat coverage --network localhost --show-stack-traces
 ```
-
 
 #
 

@@ -83,6 +83,7 @@ module.exports = {
   etherscan: {
     apiKey: {
     rinkeby: process.env.ETHERSCAN_KEY,
+    polygonMumbai: process.env.POLYGON_KEY,
   }
 },
   plugins:["solidity-coverage"]

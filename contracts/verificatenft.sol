@@ -1,56 +1,65 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.8;
+pragma solidity ^0.8.9;
 
 // imports
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 /**
-* @author Nestdevs
+* @author Verificatedevs
 * @title A Skill Verification Dapp
 */
-contract Verificate is ERC721, Pausable, Ownable {
+contract Verificate is ERC721, ERC721URIStorage, Pausable, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _nftIdCounter;
 
-    /** URL for certificate */
-    string _baseNftURI;
-
-    constructor(string memory baseURI) ERC721("VerificateNFT", "VFT") {       
-        /** declare variable for the baseuri */
-        _baseNftURI = baseURI;
-    }
-
-    function _baseURI() internal view override returns (string memory) {
-        return _baseNftURI;
-    }
-
-    /** change certificate url */
-    function setBaseNftURI(string memory baseURI) public onlyOwner whenNotPaused {
-    _baseNftURI = baseURI;
-    }
+    constructor() ERC721("VerificateNFT", "VFT") {}
 
     /** allow contract owner to mint nft to recipient */
-    function safeMint(address recipient) public onlyOwner whenNotPaused {
+    function safeMint(address to, string memory uri) 
+        public 
+        onlyOwner
+        whenNotPaused 
+    {
         uint256 nftId = _nftIdCounter.current();
-        /** increment nft count per mint */
         _nftIdCounter.increment();
-        _safeMint(recipient, nftId);
+        _safeMint(to, nftId);
+        _setTokenURI(nftId, uri);
     }
 
-    function _beforeTokenTransfer(address from, address recipient, uint256 nftId) internal whenNotPaused override {
-        super._beforeTokenTransfer(from, recipient, nftId);
+    /** option to destroy nft */
+    function _burn(uint256 nftId) 
+        internal 
+        override(ERC721, ERC721URIStorage) 
+    {
+        super._burn(nftId);
+    }
+
+    function tokenURI(uint256 nftId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(nftId);
     }
 
     /** pause contract in the event of modifications or security breach */
-    function pause() public onlyOwner {
+    function pause()
+        public 
+        onlyOwner 
+    {
         _pause();
     }
 
     /** unpause the contract */
-    function unpause() public onlyOwner {
+    function unpause() 
+        public 
+        onlyOwner 
+    {
         _unpause();
     }
 }

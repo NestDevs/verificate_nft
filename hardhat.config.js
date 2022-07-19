@@ -1,5 +1,5 @@
+require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
-require("@nomiclabs/hardhat-waffle");
 require("@tenderly/hardhat-tenderly");
 require("hardhat-deploy");
 require("hardhat-gas-reporter");
@@ -52,7 +52,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.10",
+        version: "0.8.9",
         settings: {
           optimizer: {
             enabled: true,
@@ -82,6 +82,7 @@ module.exports = {
   etherscan: {
     apiKey: {
     rinkeby: process.env.ETHERSCAN_KEY,
+    polygonMumbai: process.env.POLYGON_KEY,
   }
 },
   plugins:["solidity-coverage"]

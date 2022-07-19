@@ -1,4 +1,4 @@
-# NFTSwap
+# Verificate_NFT
 
 > ## Table of contents
 - [Overview](#overview)
@@ -13,15 +13,16 @@
   - [Compile](#compile)
   - [Deploy](#deploy)
   - [Verify](#verify)
+  - [Verified Contract Address](#verified-contract-address)
 - [Setup the Frontend](#setup-the-frontend)
   - [Install Dependencies](#install-dependencies)
 - [Testing the Smartcontract](#testing-the-smartcontract)
-- [NFTSwap Contract Address](#NFTSwap-contract-address)
+- [Contributors](#contributors)
 - [Contributing to the project](#contributing-to-the-project)
 #
 > ## Overview
 <p align="justify">
-NFTSwap is a dapp that allows NFT holders to negotiate and swap their collections for other NFTs
+Verificate is a dapp that allows skilled members of the workforce to take tests and earn a certificate verifing their skills.
 </p>
 
 
@@ -30,22 +31,20 @@ NFTSwap is a dapp that allows NFT holders to negotiate and swap their collection
 | <b><u>Stack</u></b> | <b><u>Usage</u></b> |
 | :------------------ | :------------------ |
 | **`Solidity`**      | Smart contract      |
-| **`React JS`**      | Frontend            |
-
 #
 > ## Repo Setup
 
 <p align="justify">
-To setup the repo, first fork the NFTSwap repo, then clone the forked repository to create a copy on the local machine.
+To setup the repo, first fork the Verificate_NFT repo, then clone the forked repository to create a copy on the local machine.
 </p>
 
-    $ git clone https://github.com/pauline-banye/NFTSwap.git
+    $ git clone https://github.com/pauline-banye/verificate_nft.git
 
 <p align="justify">
-Change directory to the cloned repo and set the original NFTSwap repository as the "upstream" and your forked repository as the "origin" using gitbash.
+Change directory to the cloned repo and set the original Verificate_NFT repository as the "upstream" and your forked repository as the "origin" using gitbash.
 </p>
 
-    $ git remote add upstream https://github.com/NestDevs/NFTSwap.git
+    $ git remote add upstream https://github.com/NestDevs/verificate_nft.git
 
 #
 
@@ -69,13 +68,10 @@ The steps involved are outlined below:-
 > ### Install Hardhat
 The first step involves cloning and installing hardhat.
 ```shell
-$ cd NFTSwap
 
 $ npm i -D hardhat
 
-$ npm install
-
-$ npm install --save-dev "@nomiclabs/hardhat-waffle" "ethereum-waffle" "chai" "@nomiclabs/hardhat-ethers" "ethers" "web3" "@nomiclabs/hardhat-web3" "@nomiclabs/hardhat-etherscan" "@openzeppelin/contracts" "dotenv" "@tenderly/hardhat-tenderly" "hardhat-gas-reporter" "hardhat-deploy"
+$ npm install --save-dev "@nomicfoundation/hardhat-chai-matchers" "chai" "@nomiclabs/hardhat-ethers" "ethers" "web3" "@nomiclabs/hardhat-web3" "@nomiclabs/hardhat-etherscan" "@openzeppelin/contracts" "dotenv" "@tenderly/hardhat-tenderly" "hardhat-gas-reporter" "hardhat-deploy"
 ```
 > ### Env Setup
  Next create a `.env` file by using the sample.env. Retrieve your information from the relevant sites and input the information where needed in the `.env` file.
@@ -144,10 +140,12 @@ $ npx hardhat run scripts/deploy.js --network mumbai
 > ### Verify
 - To verify the smartcontract:
 ```
-$ npx hardhat verify ... --network mumbai
+$ npx hardhat verify 0x08010583981Baf28b6A85AF72fC16C011148436D --network mumbai
 ```
-- Note for verificition, the first address is the ZuriSchoolToken address, while the second is the NFTSwap address.
 
+#
+> ### Verified Contract Address
+https://mumbai.polygonscan.com/address/0x08010583981Baf28b6A85AF72fC16C011148436D#code
 #
 > ## Setup the Frontend
 - First run the frontend on your local server to ensure it's fully functional before building for production.
@@ -188,12 +186,11 @@ $ npx hardhat coverage --network localhost
 $ npx hardhat coverage --network localhost --show-stack-traces
 ```
 
-
 #
 
 > ## Contributors
 
-This Project was created by the members of NestDevs during the Blockgames Internship.
+This Project was created by the members of NestDevs for the Nestcoin Hackaton.
 
 #
 > ## Contributing to the project
